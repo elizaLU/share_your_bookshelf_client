@@ -1,5 +1,6 @@
 import React from "react";
 import BookList from "./components/BookList";
+import AddBookForm from "./components/AddBookForm";
 import ApolloClient from "apollo-boost";
 //data gotten from endpoint will be provided inside the ApolloProvider
 import { ApolloProvider } from "react-apollo";
@@ -15,6 +16,7 @@ function App() {
       <div>
         <h1>Bookshelf</h1>
         <BookList />
+        <AddBookForm />
       </div>
     </ApolloProvider>
   );

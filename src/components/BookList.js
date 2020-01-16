@@ -21,6 +21,7 @@ const getBooksQuery = gql`
 `;
 class BookList extends Component {
   displayBooks() {
+    //data is attached to props when we bind the query to the component
     const data = this.props.data;
     //the coolest easiest way to await data loading, and avoid the undefinced hell, I learned so far
     if (data.loading) {
@@ -39,7 +40,7 @@ class BookList extends Component {
     }
   }
   render() {
-    console.log("what are the props", this.props); //need to install CORS on express server
+    // console.log("what are the props", this.props); //need to install CORS on express server
     return (
       <div>
         <h2>Shared Books</h2>
