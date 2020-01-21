@@ -8,8 +8,44 @@ import {
 import { compose } from "redux";
 
 class AddBookForm extends Component {
+  state = {
+    title: "",
+    genre: "",
+    availability: true,
+    authorId: "",
+    ownerId: ""
+    //userId: this.props.user.userId,
+  };
+
+  onChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+  onSubmit = event => {
+    event.preventDefault();
+    this.props.addBookMutation({
+      variables: {
+        title: this.state.title,
+        genre: this.state.genre,
+        availability: this.state.availability,
+        authorId: this.state.authorId,
+        ownerId: this.state.ownerId
+      }
+    });
+
+    this.setState({
+      title: "",
+      genre: "",
+      availability: true
+    });
+
+    console.log("whats the state now?", this.state);
+  };
+
   displayAuthors() {
-    console.log("what's up authors", this.props);
+    //console.log("what's up authors", this.props);
     //data is attached to props when we bind the query to the component
     const data = this.props.getAuthorsQuery;
     //the coolest easiest way to await data loading, and avoid the undefinced hell, I learned so far
@@ -28,7 +64,7 @@ class AddBookForm extends Component {
   }
 
   displayOwners() {
-    console.log("what's up owners", this.props);
+    //console.log("what's up owners", this.props);
     //data is attached to props when we bind the query to the component
     const ownerData = this.props.getOwnersQuery;
     //the coolest easiest way to await data loading, and avoid the undefinced hell, I learned so far
@@ -49,26 +85,26 @@ class AddBookForm extends Component {
     return (
       <div>
         <h2>Add your books here</h2>
-        <form>
+        <form onSubmit={this.onSubmit}>
           <div className="field">
             <label>Book title</label>
-            <input type="text"></input>
+            <input type="text" name="title" onChange={this.onChange}></input>
           </div>
           <div className="field">
             <label>Author</label>
-            <select>
+            <select name="authorId" onChange={this.onChange}>
               <option>Select Author</option>
               {this.displayAuthors()}
             </select>
           </div>
           <div className="field">
             <label>Genre</label>
-            <input type="text"></input>
+            <input type="text" name="genre" onChange={this.onChange}></input>
           </div>
 
           <div className="field">
             <label>Owner</label>
-            <select>
+            <select name="ownerId" onChange={this.onChange}>
               <option>Select Owner</option>
               {this.displayOwners()}
             </select>
@@ -81,10 +117,16 @@ class AddBookForm extends Component {
               name="availability"
               value="available"
               defaultChecked
+              onChange={this.onChange}
             />
             <br />
             <label htmlFor="false">unavailable</label>
-            <input type="radio" name="availability" value="unavailable" />
+            <input
+              type="radio"
+              name="availability"
+              value="unavailable"
+              onChange={this.onChange}
+            />
             <br />
           </div>
           <button type="submit">ADD BOOK</button>
