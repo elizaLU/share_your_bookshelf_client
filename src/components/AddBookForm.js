@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo"; //binds query to component
-import { getAuthorsQuery } from "../queries/queries";
+import {
+  getAuthorsQuery,
+  getOwnersQuery,
+  addBookMutation
+} from "../queries/queries";
+import { compose } from "redux";
 
 class AddBookForm extends Component {
   displayAuthors() {
-    //console.log("what's up authors", this.props);
+    console.log("what's up authors", this.props);
     //data is attached to props when we bind the query to the component
-    const data = this.props.data;
+    const data = this.props.getAuthorsQuery;
     //the coolest easiest way to await data loading, and avoid the undefinced hell, I learned so far
     if (data.loading) {
       return <option disabled>Loading authors</option>;
@@ -26,12 +31,12 @@ class AddBookForm extends Component {
   displayOwners() {
     console.log("what's up owners", this.props); //returns authors as well, check if two queries can be made from one component.graphql(methods) - only one?
     //data is attached to props when we bind the query to the component
-    const data = this.props.data;
+    const ownerData = this.props.getOwnersQuery;
     //the coolest easiest way to await data loading, and avoid the undefinced hell, I learned so far
-    if (data.loading) {
+    if (ownerData.loading) {
       return <option disabled>Loading owners</option>;
     } else {
-      return data.owners.map(owner => {
+      return ownerData.owners.map(owner => {
         return (
           <option
             key={owner.id}
@@ -62,13 +67,13 @@ class AddBookForm extends Component {
             <input type="text"></input>
           </div>
 
-          {/* <div className="field">
+          <div className="field">
             <label>Owner</label>
             <select>
               <option>Select Owner</option>
-              {this.displayOwners()} 
-            </select> 
-          </div>*/}
+              {this.displayOwners()}
+            </select>
+          </div>
 
           <div className="field">
             <label htmlFor="true">available</label>
@@ -90,7 +95,8 @@ class AddBookForm extends Component {
   }
 }
 
-export default graphql(getAuthorsQuery, 
-  // getOwnersQuery
-  )
-  (AddBookForm);
+export default compose(
+  graphql(getAuthorsQuery, { name: "getAuthorsQuery" }),
+  graphql(addBookMutation, { name: "addBookMutation" }),
+  graphql(getOwnersQuery, { name: "getOwnersQuery" })
+)(AddBookForm);
