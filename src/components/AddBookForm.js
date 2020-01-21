@@ -26,10 +26,9 @@ class AddBookForm extends Component {
       });
     }
   }
-  //I cannot combine multiple queries with neither, combine, lodash apollo hooks etc. very frustrating.
-  //I will make the logged in user as the default owner of the book instead and remove owner filed from the form here :<
+
   displayOwners() {
-    console.log("what's up owners", this.props); //returns authors as well, check if two queries can be made from one component.graphql(methods) - only one?
+    console.log("what's up owners", this.props);
     //data is attached to props when we bind the query to the component
     const ownerData = this.props.getOwnersQuery;
     //the coolest easiest way to await data loading, and avoid the undefinced hell, I learned so far
