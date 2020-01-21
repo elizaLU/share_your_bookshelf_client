@@ -1,29 +1,10 @@
 import React, { Component } from "react";
-import { gql } from "apollo-boost"; //parses JS into graphQL
 import { graphql } from "react-apollo"; //binds query to component
-
-const getAuthorsQuery = gql`
-  {
-    authors {
-      id
-      name
-      surname
-    }
-  }
-`;
-const getOwnersQuery = gql`
-  {
-    owners {
-      id
-      name
-      surname
-    }
-  }
-`;
+import { getAuthorsQuery } from "../queries/queries";
 
 class AddBookForm extends Component {
   displayAuthors() {
-    console.log("what's up authors", this.props);
+    //console.log("what's up authors", this.props);
     //data is attached to props when we bind the query to the component
     const data = this.props.data;
     //the coolest easiest way to await data loading, and avoid the undefinced hell, I learned so far
@@ -40,7 +21,7 @@ class AddBookForm extends Component {
       });
     }
   }
-  //I cannot combine multiple queries with neither, combine, lodash apollo hooks etc. very frustrating. 
+  //I cannot combine multiple queries with neither, combine, lodash apollo hooks etc. very frustrating.
   //I will make the logged in user as the default owner of the book instead and remove owner filed from the form here :<
   displayOwners() {
     console.log("what's up owners", this.props); //returns authors as well, check if two queries can be made from one component.graphql(methods) - only one?
@@ -80,7 +61,7 @@ class AddBookForm extends Component {
             <label>Genre</label>
             <input type="text"></input>
           </div>
-          
+
           {/* <div className="field">
             <label>Owner</label>
             <select>
@@ -109,4 +90,7 @@ class AddBookForm extends Component {
   }
 }
 
-export default graphql(getAuthorsQuery, getOwnersQuery)(AddBookForm);
+export default graphql(getAuthorsQuery, 
+  // getOwnersQuery
+  )
+  (AddBookForm);

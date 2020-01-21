@@ -1,24 +1,7 @@
 import React, { Component } from "react";
-import { gql } from "apollo-boost"; //parses JS into graphQL
 import { graphql } from "react-apollo"; //binds query to component
+import { getBooksQuery } from "../queries/queries";
 
-//construct query and bind it in the component
-const getBooksQuery = gql`
-  {
-    books {
-      id
-      title
-      availability
-      author {
-        name
-        surname
-      }
-      owner {
-        name
-      }
-    }
-  }
-`;
 class BookList extends Component {
   displayBooks() {
     //data is attached to props when we bind the query to the component
