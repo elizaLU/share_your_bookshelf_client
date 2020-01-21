@@ -27,14 +27,24 @@ const getAuthorsQuery = gql`
     }
   }
 `;
-// const getOwnersQuery = gql`
-//   {
-//     owners {
-//       id
-//       name
-//       surname
-//     }
-//   }
-// `;
+const addBookMutation = gql`
+  mutation {
+    addBook (
+      title: "",
+      genre: "",
+      availability: true,
+      authorId: "",
+      ownerId: ""   
+      ){
+        title,
+        genre,
+        id
 
-export { getBooksQuery, getAuthorsQuery };
+      }
+  }
+`;
+//ownerId from the state
+//should I use redux thunks for this?
+//can I use redux thunks for apollo and graphQL?
+
+export { getBooksQuery, getAuthorsQuery, addBookMutation };
