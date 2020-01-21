@@ -36,21 +36,25 @@ const getOwnersQuery = gql`
     }
   }
 `;
-
+//pass query variables $name
 const addBookMutation = gql`
-  mutation {
-    addBook (
-      title: "",
-      genre: "",
-      availability: true,
-      authorId: "",
-      ownerId: ""   
-      ){
-        title,
-        genre,
-        id
-
-      }
+  mutation AddBook(
+    $title: String!,
+    $genre: String!,
+    $availability: Boolean!,
+    $authorId: ID!,
+    $ownerId: ID!
+  ) {
+    addBook(
+      title: $title,
+      genre: $genre,
+      availability: $availability,
+      authorId: $authorId,
+      ownerId: $ownerId
+    ) {
+      title
+      genre
+      id    }
   }
 `;
 //ownerId from the state
