@@ -16,7 +16,7 @@ class AddBookForm extends Component {
     ownerId: ""
     //userId: this.props.user.userId,
   };
-  
+
   onChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -29,7 +29,7 @@ class AddBookForm extends Component {
       variables: {
         title: this.state.title,
         genre: this.state.genre,
-        availability: this.state.availability,
+        availability: JSON.parse(this.state.availability),
         authorId: this.state.authorId,
         ownerId: this.state.ownerId
       }
@@ -38,10 +38,9 @@ class AddBookForm extends Component {
     this.setState({
       title: "",
       genre: "",
-      availability: true
+      authorId: "",
+      ownerId: ""
     });
-
-    console.log("whats the state now?", this.state);
   };
 
   displayAuthors() {
@@ -64,10 +63,7 @@ class AddBookForm extends Component {
   }
 
   displayOwners() {
-    //console.log("what's up owners", this.props);
-    //data is attached to props when we bind the query to the component
     const ownerData = this.props.getOwnersQuery;
-    //the coolest easiest way to await data loading, and avoid the undefinced hell, I learned so far
     if (ownerData.loading) {
       return <option disabled>Loading owners</option>;
     } else {
@@ -82,29 +78,47 @@ class AddBookForm extends Component {
     }
   }
   render() {
-    return (
+        return (
       <div>
         <h2>Add your books here</h2>
         <form onSubmit={this.onSubmit}>
           <div className="field">
             <label>Book title</label>
-            <input type="text" value={this.state.title} name="title" onChange={this.onChange}></input>
+            <input
+              type="text"
+              value={this.state.title}
+              name="title"
+              onChange={this.onChange}
+            ></input>
           </div>
           <div className="field">
             <label>Author</label>
-            <select name="authorId" value={this.state.authorId}onChange={this.onChange}>
+            <select
+              name="authorId"
+              value={this.state.authorId}
+              onChange={this.onChange}
+            >
               <option>Select Author</option>
               {this.displayAuthors()}
             </select>
           </div>
           <div className="field">
             <label>Genre</label>
-            <input type="text" name="genre" value={this.state.genre} onChange={this.onChange}></input>
+            <input
+              type="text"
+              name="genre"
+              value={this.state.genre}
+              onChange={this.onChange}
+            ></input>
           </div>
 
           <div className="field">
             <label>Owner</label>
-            <select name="ownerId" value={this.state.ownerId}onChange={this.onChange}>
+            <select
+              name="ownerId"
+              value={this.state.ownerId}
+              onChange={this.onChange}
+            >
               <option>Select Owner</option>
               {this.displayOwners()}
             </select>
@@ -116,7 +130,6 @@ class AddBookForm extends Component {
               type="radio"
               name="availability"
               value={this.state.availability}
-              defaultChecked
               onChange={this.onChange}
             />
             <br />
@@ -124,8 +137,7 @@ class AddBookForm extends Component {
             <input
               type="radio"
               name="availability"
-              //dirty fix, but works for now, tried !this.state.availability and falsy expression
-              value={this.state.availability = false}
+              value={!this.state.availability}
               onChange={this.onChange}
             />
             <br />
