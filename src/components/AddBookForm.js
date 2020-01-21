@@ -26,6 +26,7 @@ class AddBookForm extends Component {
   onSubmit = event => {
     event.preventDefault();
     this.props.addBookMutation({
+      //query variables to the mutation
       variables: {
         title: this.state.title,
         genre: this.state.genre,
@@ -78,7 +79,7 @@ class AddBookForm extends Component {
     }
   }
   render() {
-        return (
+    return (
       <div>
         <h2>Add your books here</h2>
         <form onSubmit={this.onSubmit}>
