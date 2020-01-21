@@ -124,7 +124,7 @@ class AddBookForm extends Component {
             <input
               type="radio"
               name="availability"
-              //dirty fix, but works for now
+              //dirty fix, but works for now, tried !this.state.availability and falsy expression
               value={this.state.availability = false}
               onChange={this.onChange}
             />
