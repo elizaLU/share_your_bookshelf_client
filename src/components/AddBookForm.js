@@ -16,7 +16,7 @@ class AddBookForm extends Component {
     ownerId: ""
     //userId: this.props.user.userId,
   };
-
+  
   onChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -88,23 +88,23 @@ class AddBookForm extends Component {
         <form onSubmit={this.onSubmit}>
           <div className="field">
             <label>Book title</label>
-            <input type="text" name="title" onChange={this.onChange}></input>
+            <input type="text" value={this.state.title} name="title" onChange={this.onChange}></input>
           </div>
           <div className="field">
             <label>Author</label>
-            <select name="authorId" onChange={this.onChange}>
+            <select name="authorId" value={this.state.authorId}onChange={this.onChange}>
               <option>Select Author</option>
               {this.displayAuthors()}
             </select>
           </div>
           <div className="field">
             <label>Genre</label>
-            <input type="text" name="genre" onChange={this.onChange}></input>
+            <input type="text" name="genre" value={this.state.genre} onChange={this.onChange}></input>
           </div>
 
           <div className="field">
             <label>Owner</label>
-            <select name="ownerId" onChange={this.onChange}>
+            <select name="ownerId" value={this.state.ownerId}onChange={this.onChange}>
               <option>Select Owner</option>
               {this.displayOwners()}
             </select>
@@ -115,7 +115,7 @@ class AddBookForm extends Component {
             <input
               type="radio"
               name="availability"
-              value="available"
+              value={this.state.availability}
               defaultChecked
               onChange={this.onChange}
             />
@@ -124,7 +124,8 @@ class AddBookForm extends Component {
             <input
               type="radio"
               name="availability"
-              value="unavailable"
+              //dirty fix, but works for now
+              value={this.state.availability = false}
               onChange={this.onChange}
             />
             <br />
