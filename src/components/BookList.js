@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo"; //binds query to component
 import { getBooksQuery } from "../queries/queries";
+import { compose } from "redux";
+
 
 class BookList extends Component {
   displayBooks() {
+    //console.log(this.props);
     //data is attached to props when we bind the query to the component
-    const data = this.props.data;
+    const data = this.props.getBooksQuery
     //the coolest easiest way to await data loading, and avoid the undefinced hell, I learned so far
     if (data.loading) {
       return <div>Loading books</div>;
@@ -33,4 +36,5 @@ class BookList extends Component {
   }
 }
 
-export default graphql(getBooksQuery)(BookList);
+export default compose(
+  graphql(getBooksQuery, {name: "getBooksQuery"}))(BookList)
