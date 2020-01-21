@@ -44,7 +44,7 @@ class BookList extends Component {
     return (
       <div>
         <h2>Shared Books</h2>
-        <ol id="book-list">{this.displayBooks()}</ol>
+        <ul id="book-list">{this.displayBooks()}</ul>
       </div>
     );
   }
