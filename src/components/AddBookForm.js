@@ -3,7 +3,8 @@ import { graphql } from "react-apollo"; //binds query to component
 import {
   getAuthorsQuery,
   getOwnersQuery,
-  addBookMutation
+  addBookMutation,
+  getBooksQuery
 } from "../queries/queries";
 import { compose } from "redux";
 
@@ -33,7 +34,9 @@ class AddBookForm extends Component {
         availability: JSON.parse(this.state.availability),
         authorId: this.state.authorId,
         ownerId: this.state.ownerId
-      }
+      },
+      //refetch Book list after adding a book
+      refetchQueries: [{ query: getBooksQuery }]
     });
 
     this.setState({
