@@ -40,7 +40,8 @@ class AddBookForm extends Component {
       });
     }
   }
-  //
+  //I cannot combine multiple queries with neither, combine, lodash apollo hooks etc. very frustrating. 
+  //I will make the logged in user as the default owner of the book instead and remove owner filed from the form here :<
   displayOwners() {
     console.log("what's up owners", this.props); //returns authors as well, check if two queries can be made from one component.graphql(methods) - only one?
     //data is attached to props when we bind the query to the component
@@ -62,7 +63,7 @@ class AddBookForm extends Component {
   render() {
     return (
       <div>
-        <h2>Add a new book</h2>
+        <h2>Add your books here</h2>
         <form>
           <div className="field">
             <label>Book title</label>
@@ -79,14 +80,14 @@ class AddBookForm extends Component {
             <label>Genre</label>
             <input type="text"></input>
           </div>
-          <div />
-          <div className="field">
+          
+          {/* <div className="field">
             <label>Owner</label>
             <select>
               <option>Select Owner</option>
-              {this.displayOwners()}
-            </select>
-          </div>
+              {this.displayOwners()} 
+            </select> 
+          </div>*/}
 
           <div className="field">
             <label htmlFor="true">available</label>
