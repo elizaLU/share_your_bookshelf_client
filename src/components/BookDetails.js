@@ -24,8 +24,7 @@ class BookDetails extends Component {
     }
   }
   render() {
-    console.log("what are the props", this.props.getBookQuery.book); //need to install CORS on express server
-
+    //console.log("what are the props", this.props.getBookQuery.book); //need to install CORS on express server
     return (
       <div id="book-detail">
         <h2>Book Details</h2>
