@@ -24,10 +24,10 @@ class BookList extends Component {
               this.setState({ selected: book.id });
             }}
           >
-            <li>Title: {book.title}</li>
-            <p>{`by ${book.author.name}  ${book.author.surname}`}</p>
-            <p>availability: {book.availability.toString()}</p>
-            <p>Owner: {book.owner.name}</p>
+            <li>{book.title}</li>
+            {/* <p>{`by ${book.author.name}  ${book.author.surname}`}</p> */}
+            {/* <p>availability: {book.availability.toString()}</p> */}
+            {/* <p>Owner: {book.owner.name}</p> */}
           </div>
         );
       });

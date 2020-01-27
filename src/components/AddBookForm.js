@@ -136,7 +136,8 @@ class AddBookForm extends Component {
               value={this.state.availability}
               onChange={this.onChange}
             />
-            <br />
+            </div>
+            <div className="field">
             <label htmlFor="false">unavailable</label>
             <input
               type="radio"
@@ -144,8 +145,8 @@ class AddBookForm extends Component {
               value={!this.state.availability}
               onChange={this.onChange}
             />
-            <br />
           </div>
+          <br/>
           <button type="submit">ADD BOOK</button>
         </form>
       </div>

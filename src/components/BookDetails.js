@@ -11,8 +11,9 @@ class BookDetails extends Component {
         <div>
           <h2>{book.title}</h2>
           <p>
-            {book.author.name} {book.author.surname}
+            by {book.author.name} {book.author.surname}
           </p>
+          <p>owner: {book.owner.name}</p>
           <h3>Other books by this author:</h3>
           <ul className="other-books">
             {book.author.works.map(work => {
@@ -26,7 +27,7 @@ class BookDetails extends Component {
   render() {
     //console.log("what are the props", this.props.getBookQuery.book); //need to install CORS on express server
     return (
-      <div id="book-detail">
+      <div id="book-details">
         <h2>Book Details</h2>
         {this.displayBookDetails()}
       </div>
